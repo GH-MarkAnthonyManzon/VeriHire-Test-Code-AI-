@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        /* Portfolio-specific styles */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .portfolio-item {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            border-color: #f97316;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        .portfolio-title {
+            color: #ffffff;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-description {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .portfolio-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .portfolio-tag {
+            background-color: #334155;
+            color: #e5e7eb;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .portfolio-actions {
+            display: flex;
+            gap: 8px;
+            padding-top: 12px;
+            border-top: 1px solid #334155;
+        }
+
+        .portfolio-actions button {
+            flex: 1;
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background-color: #334155;
+            color: #ffffff;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            padding: 24px;
+            border-top: 1px solid #334155;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            background-color: #0f172a;
+            border: 2px dashed #334155;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-preview-placeholder {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .project-type-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .project-type-btn {
+            background-color: #0f172a;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            padding: 16px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .project-type-btn:hover {
+            border-color: #f97316;
+            background-color: #1e293b;
+        }
+
+        .project-type-btn.active {
+            border-color: #f97316;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(251, 146, 60, 0.1) 100%);
+            color: #f97316;
+        }
+
+        .project-type-icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search portfolio..." id="portfolioSearch">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="worker-profile.html">My Profile</a>
+                        <a href="worker-portfolio.html">Portfolio</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="worker-dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="browse-jobs.html" class="sidebar-link">
+                    <span class="sidebar-icon">🔍</span>
+                    <span>Browse Jobs</span>
+                </a>
+                <a href="my-applications.html" class="sidebar-link">
+                    <span class="sidebar-icon">📋</span>
+                    <span>My Applications</span>
+                </a>
+                <a href="worker-portfolio.html" class="sidebar-link active">
+                    <span class="sidebar-icon">📂</span>
+                    <span>Portfolio</span>
+                </a>
+                <a href="worker-profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1>My Portfolio</h1>
+                    <p class="dashboard-subtitle">Showcase your best work to employers</p>
+                </div>
+                <button class="btn-primary" id="addProjectBtn">+ Add Project</button>
+            </div>
+
+            <!-- Portfolio Stats -->
+            <div class="stats-grid" style="margin-bottom: 32px;">
+                <div class="stat-card">
+                    <div class="stat-icon">📂</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalProjects">0</div>
+                        <div class="stat-label">Total Projects</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👁️</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalViews">0</div>
+                        <div class="stat-label">Portfolio Views</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="featuredCount">0</div>
+                        <div class="stat-label">Featured Projects</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="completionRate">0%</div>
+                        <div class="stat-label">Profile Strength</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Portfolio items will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">📂</div>
+                <h3>No projects yet</h3>
+                <p>Start building your portfolio by adding your first project</p>
+                <button class="btn-primary" onclick="document.getElementById('addProjectBtn').click()">+ Add Your First Project</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Project</h2>
+                <button class="modal-close" id="closeModal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="projectForm">
+                    <!-- Project Type Selection -->
+                    <div class="form-group">
+                        <label>Project Type</label>
+                        <div class="project-type-selector">
+                            <button type="button" class="project-type-btn active" data-type="web">
+                                <span class="project-type-icon">💻</span>
+                                Web Project
+                            </button>
+                            <button type="button" class="project-type-btn" data-type="design">
+                                <span class="project-type-icon">🎨</span>
+                                Design
+                            </button>
+                            <button type="button" class="project-type-btn" data-type="other">
+                                <span class="project-type-icon">📄</span>
+                                Other
+                            </button>
+                        </div>
+                        <input type="hidden" id="projectType" name="projectType" value="web">
+                    </div>
+
+                    <!-- Project Title -->
+                    <div class="form-group">
+                        <label for="projectTitle">Project Title <span class="required">*</span></label>
+                        <input type="text" id="projectTitle" name="projectTitle" required placeholder="e.g., E-commerce Website Redesign">
+                    </div>
+
+                    <!-- Project Description -->
+                    <div class="form-group">
+                        <label for="projectDescription">Description <span class="required">*</span></label>
+                        <textarea id="projectDescription" name="projectDescription" rows="4" required placeholder="Describe what you built, your role, and the technologies used..."></textarea>
+                        <small><span id="descCount">0</span>/500 characters</small>
+                    </div>
+
+                    <!-- Technologies/Skills Used -->
+                    <div class="form-group">
+                        <label for="projectTechnologies">Technologies/Skills Used</label>
+                        <input type="text" id="projectTechnologies" name="projectTechnologies" placeholder="e.g., React, Node.js, MongoDB">
+                        <small>Separate with commas</small>
+                    </div>
+
+                    <!-- Project Link -->
+                    <div class="form-group">
+                        <label for="projectLink">Project Link (Live Demo/GitHub)</label>
+                        <input type="url" id="projectLink" name="projectLink" placeholder="https://your-project.com">
+                    </div>
+
+                    <!-- Image URL -->
+                    <div class="form-group">
+                        <label for="projectImage">Project Image URL</label>
+                        <input type="url" id="projectImage" name="projectImage" placeholder="https://example.com/image.jpg">
+                        <small>Paste an image URL to show a preview of your project</small>
+                        <div class="image-preview" id="imagePreview">
+                            <div class="image-preview-placeholder">
+                                📷 Image preview will appear here
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Checkbox -->
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="projectFeatured" name="projectFeatured">
+                            <span><strong>Feature this project</strong> - Show as a highlight on your profile</span>
+                        </label>
+                    </div>
+
+                    <input type="hidden" id="projectId" name="projectId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary btn-large" id="cancelBtn">Cancel</button>
+                <button type="button" class="btn-primary btn-large" id="saveProjectBtn">💾 Save Project</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="worker-portfolio.js"></script>
+</body>
+</html>
