@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .debug-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .debug-section {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .debug-section h2 {
+            color: #f97316;
+            margin-bottom: 16px;
+        }
+        .debug-data {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
+            color: #e5e7eb;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .debug-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .status {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .status.success {
+            background-color: #10b981;
+            color: white;
+        }
+        .status.error {
+            background-color: #ef4444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">VeriHire</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html" class="btn-secondary">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="debug-container">
+        <h1 style="color: #ffffff; margin-bottom: 24px;">🔧 Debug Panel</h1>
+
+        <!-- Storage Status -->
+        <div class="debug-section">
+            <h2>Storage Status</h2>
+            <div id="storageStatus"></div>
+        </div>
+
+        <!-- Current Session -->
+        <div class="debug-section">
+            <h2>Current Session</h2>
+            <div class="debug-data" id="sessionData">No active session</div>
+        </div>
+
+        <!-- Registered Users -->
+        <div class="debug-section">
+            <h2>Registered Users</h2>
+            <div class="debug-data" id="usersData">No users registered</div>
+            <div class="debug-actions">
+                <button class="btn-secondary" onclick="clearUsers()">Clear All Users</button>
+                <button class="btn-primary" onclick="addTestUser('worker')">Add Test Worker</button>
+                <button class="btn-primary" onclick="addTestUser('employer')">Add Test Employer</button>
+            </div>
+        </div>
+
+        <!-- Posted Jobs -->
+        <div class="debug-section">
+            <h2>Posted Jobs</h2>
+            <div class="debug-data" id="jobsData">No jobs posted</div>
+            <div class="debug-actions">
+                <button class="btn-secondary" onclick="clearJobs()">Clear All Jobs</button>
+                <button class="btn-primary" onclick="addTestJob()">Add Test Job</button>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="debug-section">
+            <h2>Quick Actions</h2>
+            <div class="debug-actions">
+                <button class="btn-secondary" onclick="clearAllData()">🗑️ Clear All Data</button>
+                <button class="btn-primary" onclick="setupTestEnvironment()">🚀 Setup Test Environment</button>
+                <button class="btn-secondary" onclick="location.reload()">🔄 Refresh Page</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if localStorage is available
+        function checkStorage() {
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Display storage status
+        function displayStorageStatus() {
+            const statusDiv = document.getElementById('storageStatus');
+            const isAvailable = checkStorage();
+            
+            if (isAvailable) {
+                statusDiv.innerHTML = '<div class="status success">✓ localStorage is available and working</div>';
+            } else {
+                statusDiv.innerHTML = '<div class="status error">✗ localStorage is NOT available</div>';
+            }
+        }
+
+        // Display session data
+        function displaySessionData() {
+            try {
+                const sessionData = sessionStorage.getItem('verihire_session') || localStorage.getItem('verihire_session');
+                const sessionDiv = document.getElementById('sessionData');
+                
+                if (sessionData) {
+                    const parsed = JSON.parse(sessionData);
+                    sessionDiv.textContent = JSON.stringify(parsed, null, 2);
+                } else {
+                    sessionDiv.textContent = 'No active session';
+                }
+            } catch (error) {
+                document.getElementById('sessionData').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        // Display users data
+        function displayUsersData() {
+            try {
+                const users = JSON.parse(localStorage.getItem('verihire_users') || '[]');
+                const usersDiv = document.getElementById('usersData');
+                
+                if (users.length > 0) {
+                    usersDiv.textContent = JSON.stringify(users, null, 2);
+                } else {
+                    usersDiv.textContent = 'No users registered';
+                }
+            } catch (error) {
+                document.getElementById('usersData').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        // Display jobs data
+        function displayJobsData() {
+            try {
+                const jobs = JSON.parse(localStorage.getItem('verihire_jobs') || '[]');
+                const jobsDiv = document.getElementById('jobsData');
+                
+                if (jobs.length > 0) {
+                    jobsDiv.textContent = JSON.stringify(jobs, null, 2);
+                } else {
+                    jobsDiv.textContent = 'No jobs posted';
+                }
+            } catch (error) {
+                document.getElementById('jobsData').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        // Clear users
+        function clearUsers() {
+            if (confirm('Clear all users?')) {
+                localStorage.removeItem('verihire_users');
+                displayUsersData();
+                alert('Users cleared!');
+            }
+        }
+
+        // Clear jobs
+        function clearJobs() {
+            if (confirm('Clear all jobs?')) {
+                localStorage.removeItem('verihire_jobs');
+                displayJobsData();
+                alert('Jobs cleared!');
+            }
+        }
+
+        // Clear all data
+        function clearAllData() {
+            if (confirm('Clear ALL data including session? You will be logged out.')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                alert('All data cleared!');
+                location.reload();
+            }
+        }
+
+        // Add test worker
+        function addTestUser(type) {
+            const users = JSON.parse(localStorage.getItem('verihire_users') || '[]');
+            
+            const testUser = {
+                fullName: type === 'worker' ? 'John Worker' : 'Jane Employer',
+                email: type === 'worker' ? 'worker@test.com' : 'employer@test.com',
+                password: 'password123',
+                accountType: type,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (type === 'worker') {
+                testUser.skills = 'JavaScript, React, Node.js';
+                testUser.experience = '3-5';
+            } else {
+                testUser.companyName = 'Test Company Inc';
+                testUser.companySize = '11-50';
+                testUser.industry = 'Technology';
+            }
+            
+            // Check if already exists
+            if (users.some(u => u.email === testUser.email)) {
+                alert(`${type} test user already exists!`);
+                return;
+            }
+            
+            users.push(testUser);
+            localStorage.setItem('verihire_users', JSON.stringify(users));
+            displayUsersData();
+            alert(`Test ${type} added! Email: ${testUser.email}, Password: password123`);
+        }
+
+        // Add test job
+        function addTestJob() {
+            const jobs = JSON.parse(localStorage.getItem('verihire_jobs') || '[]');
+            
+            const testJob = {
+                id: 'job_' + Date.now(),
+                employerEmail: 'employer@test.com',
+                employerName: 'Jane Employer',
+                companyName: 'Test Company Inc',
+                jobTitle: 'Senior Full Stack Developer',
+                jobDescription: 'We are looking for an experienced full stack developer to join our growing team. You will work on cutting-edge web applications using modern technologies.',
+                jobType: 'full-time',
+                experienceLevel: 'senior',
+                salaryMin: 60000,
+                salaryMax: 80000,
+                salaryPeriod: 'year',
+                workLocation: 'remote',
+                location: 'Worldwide',
+                requiredSkills: ['JavaScript', 'React', 'Node.js', 'MongoDB'],
+                preferredSkills: ['TypeScript', 'GraphQL'],
+                requirements: 'Bachelor degree in Computer Science or equivalent experience',
+                deadline: null,
+                positions: 1,
+                useEscrow: false,
+                status: 'active',
+                createdAt: new Date().toISOString(),
+                applications: [],
+                views: 0
+            };
+            
+            jobs.push(testJob);
+            localStorage.setItem('verihire_jobs', JSON.stringify(jobs));
+            displayJobsData();
+            alert('Test job added!');
+        }
+
+        // Setup test environment
+        function setupTestEnvironment() {
+            if (confirm('Setup test environment with sample users and jobs?')) {
+                addTestUser('worker');
+                addTestUser('employer');
+                addTestJob();
+                alert('Test environment ready! You can now login with:\n\nWorker: worker@test.com / password123\nEmployer: employer@test.com / password123');
+            }
+        }
+
+        // Initialize
+        displayStorageStatus();
+        displaySessionData();
+        displayUsersData();
+        displayJobsData();
+
+        // Auto-refresh every 2 seconds
+        setInterval(() => {
+            displaySessionData();
+            displayUsersData();
+            displayJobsData();
+        }, 2000);
+
+        console.log('Debug page loaded!');
+    </script>
+</body>
+</html>

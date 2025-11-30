@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Jobs - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search jobs..." id="jobSearch">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="worker-profile.html">My Profile</a>
+                        <a href="worker-portfolio.html">Portfolio</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="worker-dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="browse-jobs.html" class="sidebar-link active">
+                    <span class="sidebar-icon">🔍</span>
+                    <span>Browse Jobs</span>
+                </a>
+                <a href="my-applications.html" class="sidebar-link">
+                    <span class="sidebar-icon">📋</span>
+                    <span>My Applications</span>
+                </a>
+                <a href="worker-portfolio.html" class="sidebar-link">
+                    <span class="sidebar-icon">📂</span>
+                    <span>Portfolio</span>
+                </a>
+                <a href="worker-profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Browse Jobs</h1>
+                    <p class="dashboard-subtitle">Find your next opportunity</p>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filters-row">
+                    <select id="jobTypeFilter" class="filter-select">
+                        <option value="">All Job Types</option>
+                        <option value="full-time">Full-time</option>
+                        <option value="part-time">Part-time</option>
+                        <option value="contract">Contract</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="internship">Internship</option>
+                    </select>
+
+                    <select id="locationFilter" class="filter-select">
+                        <option value="">All Locations</option>
+                        <option value="remote">Remote</option>
+                        <option value="on-site">On-site</option>
+                        <option value="hybrid">Hybrid</option>
+                    </select>
+
+                    <select id="experienceFilter" class="filter-select">
+                        <option value="">All Experience Levels</option>
+                        <option value="entry">Entry Level</option>
+                        <option value="mid">Mid Level</option>
+                        <option value="senior">Senior Level</option>
+                        <option value="lead">Lead/Manager</option>
+                    </select>
+
+                    <button class="btn-secondary" id="clearFiltersBtn">Clear Filters</button>
+                </div>
+            </div>
+
+            <!-- Results Count -->
+            <div class="results-header">
+                <p class="results-count" id="resultsCount">Loading jobs...</p>
+                <select id="sortFilter" class="filter-select">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="salary-high">Highest Salary</option>
+                    <option value="salary-low">Lowest Salary</option>
+                </select>
+            </div>
+
+            <!-- Jobs List -->
+            <div class="jobs-list" id="jobsList">
+                <!-- Jobs will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state hidden" id="emptyState">
+                <div class="empty-icon">🔍</div>
+                <h3>No jobs found</h3>
+                <p>Try adjusting your filters or search terms</p>
+                <button class="btn-primary" id="clearFiltersBtn2">Clear All Filters</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="browse-jobs.js"></script>
+</body>
+</html>

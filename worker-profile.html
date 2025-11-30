@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search jobs..." id="jobSearch">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="worker-profile.html">My Profile</a>
+                        <a href="worker-portfolio.html">Portfolio</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="worker-dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="browse-jobs.html" class="sidebar-link">
+                    <span class="sidebar-icon">🔍</span>
+                    <span>Browse Jobs</span>
+                </a>
+                <a href="my-applications.html" class="sidebar-link">
+                    <span class="sidebar-icon">📋</span>
+                    <span>My Applications</span>
+                </a>
+                <a href="worker-portfolio.html" class="sidebar-link">
+                    <span class="sidebar-icon">📂</span>
+                    <span>Portfolio</span>
+                </a>
+                <a href="worker-profile.html" class="sidebar-link active">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1>My Profile</h1>
+                    <p class="dashboard-subtitle">Manage your professional information</p>
+                </div>
+            </div>
+
+            <!-- Profile Completion -->
+            <div class="profile-completion" id="profileCompletion">
+                <div class="completion-header">
+                    <h3>Profile Completion</h3>
+                    <span class="completion-percentage" id="completionPercentage">0%</span>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-progress" id="completionProgress" style="width: 0%"></div>
+                </div>
+                <p class="completion-text" id="completionText">Complete your profile to stand out to employers!</p>
+            </div>
+
+            <!-- Profile Form -->
+            <form id="profileForm" class="profile-form">
+                
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Basic Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" disabled>
+                        <small>Email cannot be changed</small>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" placeholder="City, State/Country">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="headline">Professional Headline</label>
+                        <input type="text" id="headline" name="headline" placeholder="e.g., Full Stack Developer | React & Node.js Specialist">
+                        <small>Max 80 characters</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Bio / About Me</label>
+                        <textarea id="bio" name="bio" rows="5" placeholder="Tell employers about yourself, your experience, and what you're looking for..."></textarea>
+                        <small><span id="bioCount">0</span>/500 characters</small>
+                    </div>
+                </div>
+
+                <!-- Professional Details -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Professional Details</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="experience">Years of Experience <span class="required">*</span></label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Select...</option>
+                                <option value="0-1">0-1 years</option>
+                                <option value="1-3">1-3 years</option>
+                                <option value="3-5">3-5 years</option>
+                                <option value="5-10">5-10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="employmentType">Employment Type Preference</label>
+                            <select id="employmentType" name="employmentType">
+                                <option value="">Select...</option>
+                                <option value="full-time">Full-time</option>
+                                <option value="part-time">Part-time</option>
+                                <option value="contract">Contract</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="any">Open to any</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skills">Skills <span class="required">*</span></label>
+                        <input type="text" id="skills" name="skills" required placeholder="e.g., JavaScript, React, Node.js, Python">
+                        <small>Separate skills with commas</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobTitle">Current/Most Recent Job Title</label>
+                        <input type="text" id="jobTitle" name="jobTitle" placeholder="e.g., Senior Software Engineer">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Current/Most Recent Company</label>
+                        <input type="text" id="company" name="company" placeholder="e.g., Tech Company Inc.">
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Education</h2>
+                    
+                    <div class="form-group">
+                        <label for="education">Highest Education Level</label>
+                        <select id="education" name="education">
+                            <option value="">Select...</option>
+                            <option value="high-school">High School</option>
+                            <option value="associate">Associate Degree</option>
+                            <option value="bachelor">Bachelor's Degree</option>
+                            <option value="master">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                            <option value="bootcamp">Coding Bootcamp</option>
+                            <option value="self-taught">Self-taught</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="school">School/University</label>
+                            <input type="text" id="school" name="school" placeholder="e.g., University of California">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="degree">Degree/Major</label>
+                            <input type="text" id="degree" name="degree" placeholder="e.g., Computer Science">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Preferences -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Work Preferences</h2>
+                    
+                    <div class="form-group">
+                        <label for="workLocation">Work Location Preference</label>
+                        <select id="workLocation" name="workLocation">
+                            <option value="">Select...</option>
+                            <option value="remote">Remote only</option>
+                            <option value="on-site">On-site only</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="any">Any</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="salaryMin">Expected Salary (Min)</label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="salaryMin" name="salaryMin" placeholder="50000" min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salaryMax">Expected Salary (Max)</label>
+                            <div class="input-with-prefix">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="salaryMax" name="salaryMax" placeholder="80000" min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salaryPeriod">Period</label>
+                            <select id="salaryPeriod" name="salaryPeriod">
+                                <option value="year">Per Year</option>
+                                <option value="month">Per Month</option>
+                                <option value="hour">Per Hour</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="openToWork" name="openToWork">
+                            <span><strong>Open to Work</strong> - Show employers you're actively looking for opportunities</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Social Links</h2>
+                    
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn Profile</label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="github">GitHub Profile</label>
+                        <input type="url" id="github" name="github" placeholder="https://github.com/yourusername">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="portfolio">Portfolio Website</label>
+                        <input type="url" id="portfolio" name="portfolio" placeholder="https://yourportfolio.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">Other Website</label>
+                        <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary btn-large" onclick="window.location.href='worker-dashboard.html'">Cancel</button>
+                    <button type="submit" class="btn-primary btn-large">💾 Save Profile</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="worker-profile.js"></script>
+</body>
+</html>

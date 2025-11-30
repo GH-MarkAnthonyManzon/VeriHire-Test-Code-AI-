@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search candidates..." id="candidateSearch">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">5</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">🏢</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="employer-profile.html">Company Profile</a>
+                        <a href="employer-settings.html">Settings</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="employer-dashboard.html" class="sidebar-link active">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="post-job.html" class="sidebar-link">
+                    <span class="sidebar-icon">➕</span>
+                    <span>Post a Job</span>
+                </a>
+                <a href="my-jobs.html" class="sidebar-link">
+                    <span class="sidebar-icon">💼</span>
+                    <span>My Jobs</span>
+                </a>
+                <a href="applications-received.html" class="sidebar-link">
+                    <span class="sidebar-icon">📨</span>
+                    <span>Applications</span>
+                </a>
+                <a href="employer-profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Welcome Section -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Welcome back, <span id="welcomeName">Employer</span>! 👋</h1>
+                    <p class="dashboard-subtitle">Manage your job posts and find the best talent</p>
+                </div>
+                <a href="post-job.html" class="btn-primary">+ Post New Job</a>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💼</div>
+                    <div class="stat-content">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Active Job Posts</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📨</div>
+                    <div class="stat-content">
+                        <div class="stat-value">127</div>
+                        <div class="stat-label">Total Applications</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <div class="stat-value">23</div>
+                        <div class="stat-label">Shortlisted</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-value">4.9</div>
+                        <div class="stat-label">Company Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section-header">
+                <h2>Quick Actions</h2>
+            </div>
+            <div class="quick-actions">
+                <a href="post-job.html" class="action-card">
+                    <div class="action-icon">➕</div>
+                    <h3>Post a Job</h3>
+                    <p>Create new opportunity</p>
+                </a>
+                <a href="applications-received.html" class="action-card">
+                    <div class="action-icon">📨</div>
+                    <h3>Review Applications</h3>
+                    <p>Check new candidates</p>
+                </a>
+                <a href="my-jobs.html" class="action-card">
+                    <div class="action-icon">💼</div>
+                    <h3>Manage Jobs</h3>
+                    <p>Edit or close posts</p>
+                </a>
+            </div>
+
+            <!-- Active Job Posts -->
+            <div class="section-header">
+                <h2>Your Active Job Posts</h2>
+                <a href="my-jobs.html" class="view-all-link">View All →</a>
+            </div>
+            <div class="jobs-list employer-jobs" id="activeJobs">
+                <div class="job-card employer-job-card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3>Full Stack Developer</h3>
+                            <p class="company-name">Posted 3 days ago</p>
+                        </div>
+                        <span class="job-badge featured">Active</span>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-detail-item">💰 $60,000 - $80,000/year</span>
+                        <span class="job-detail-item">📍 Remote</span>
+                        <span class="job-detail-item">⏰ Full-time</span>
+                    </div>
+                    <div class="job-stats-row">
+                        <div class="job-stat">
+                            <span class="stat-number">42</span>
+                            <span class="stat-label">Applications</span>
+                        </div>
+                        <div class="job-stat">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Shortlisted</span>
+                        </div>
+                        <div class="job-stat">
+                            <span class="stat-number">324</span>
+                            <span class="stat-label">Views</span>
+                        </div>
+                    </div>
+                    <div class="job-footer">
+                        <a href="#" class="btn-secondary btn-small">View Applications</a>
+                        <a href="#" class="btn-primary btn-small">Edit Job</a>
+                    </div>
+                </div>
+
+                <div class="job-card employer-job-card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3>UI/UX Designer</h3>
+                            <p class="company-name">Posted 1 week ago</p>
+                        </div>
+                        <span class="job-badge featured">Active</span>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-detail-item">💰 $50,000 - $65,000/year</span>
+                        <span class="job-detail-item">📍 Hybrid</span>
+                        <span class="job-detail-item">⏰ Full-time</span>
+                    </div>
+                    <div class="job-stats-row">
+                        <div class="job-stat">
+                            <span class="stat-number">28</span>
+                            <span class="stat-label">Applications</span>
+                        </div>
+                        <div class="job-stat">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Shortlisted</span>
+                        </div>
+                        <div class="job-stat">
+                            <span class="stat-number">198</span>
+                            <span class="stat-label">Views</span>
+                        </div>
+                    </div>
+                    <div class="job-footer">
+                        <a href="#" class="btn-secondary btn-small">View Applications</a>
+                        <a href="#" class="btn-primary btn-small">Edit Job</a>
+                    </div>
+                </div>
+
+                <div class="job-card employer-job-card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3>Marketing Manager</h3>
+                            <p class="company-name">Posted 2 weeks ago</p>
+                        </div>
+                        <span class="job-badge featured">Active</span>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-detail-item">💰 $55,000 - $70,000/year</span>
+                        <span class="job-detail-item">📍 On-site</span>
+                        <span class="job-detail-item">⏰ Full-time</span>
+                    </div>
+                    <div class="job-stats-row">
+                        <div class="job-stat">
+                            <span class="stat-number">57</span>
+                            <span class="stat-label">Applications</span>
+                        </div>
+                        <div class="job-stat">
+                            <span class="stat-number">10</span>
+                            <span class="stat-label">Shortlisted</span>
+                        </div>
+                        <div class="job-stat">
+                            <span class="stat-number">412</span>
+                            <span class="stat-label">Views</span>
+                        </div>
+                    </div>
+                    <div class="job-footer">
+                        <a href="#" class="btn-secondary btn-small">View Applications</a>
+                        <a href="#" class="btn-primary btn-small">Edit Job</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Applications -->
+            <div class="section-header">
+                <h2>Recent Applications</h2>
+                <a href="applications-received.html" class="view-all-link">View All →</a>
+            </div>
+            <div class="applications-list">
+                <div class="application-card">
+                    <div class="applicant-info">
+                        <div class="applicant-avatar">👨‍💻</div>
+                        <div class="applicant-details">
+                            <h4>John Smith</h4>
+                            <p>Applied for Full Stack Developer</p>
+                            <div class="applicant-meta">
+                                <span>5+ years experience</span>
+                                <span>•</span>
+                                <span>⭐ 4.9 rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="application-actions">
+                        <span class="application-time">2 hours ago</span>
+                        <div class="action-buttons">
+                            <button class="btn-secondary btn-small">View Profile</button>
+                            <button class="btn-primary btn-small">Shortlist</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card">
+                    <div class="applicant-info">
+                        <div class="applicant-avatar">👩‍🎨</div>
+                        <div class="applicant-details">
+                            <h4>Sarah Johnson</h4>
+                            <p>Applied for UI/UX Designer</p>
+                            <div class="applicant-meta">
+                                <span>3-5 years experience</span>
+                                <span>•</span>
+                                <span>⭐ 4.8 rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="application-actions">
+                        <span class="application-time">5 hours ago</span>
+                        <div class="action-buttons">
+                            <button class="btn-secondary btn-small">View Profile</button>
+                            <button class="btn-primary btn-small">Shortlist</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card">
+                    <div class="applicant-info">
+                        <div class="applicant-avatar">👨‍💼</div>
+                        <div class="applicant-details">
+                            <h4>Michael Chen</h4>
+                            <p>Applied for Marketing Manager</p>
+                            <div class="applicant-meta">
+                                <span>5+ years experience</span>
+                                <span>•</span>
+                                <span>⭐ 5.0 rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="application-actions">
+                        <span class="application-time">1 day ago</span>
+                        <div class="action-buttons">
+                            <button class="btn-secondary btn-small">View Profile</button>
+                            <button class="btn-primary btn-small">Shortlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="employer-dashboard.js"></script>
+</body>
+</html>

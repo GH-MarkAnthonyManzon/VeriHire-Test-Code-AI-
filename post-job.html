@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search candidates..." id="candidateSearch">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">5</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">🏢</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="employer-profile.html">Company Profile</a>
+                        <a href="employer-settings.html">Settings</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="employer-dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="post-job.html" class="sidebar-link active">
+                    <span class="sidebar-icon">➕</span>
+                    <span>Post a Job</span>
+                </a>
+                <a href="my-jobs.html" class="sidebar-link">
+                    <span class="sidebar-icon">💼</span>
+                    <span>My Jobs</span>
+                </a>
+                <a href="applications-received.html" class="sidebar-link">
+                    <span class="sidebar-icon">📨</span>
+                    <span>Applications</span>
+                </a>
+                <a href="employer-profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Post a New Job</h1>
+                    <p class="dashboard-subtitle">Fill in the details to create a job posting</p>
+                </div>
+                <a href="employer-dashboard.html" class="btn-secondary">← Back to Dashboard</a>
+            </div>
+
+            <!-- Job Posting Form -->
+            <div class="form-container">
+                <form id="postJobForm" class="job-post-form">
+                    
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h2 class="form-section-title">Basic Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="jobTitle">Job Title <span class="required">*</span></label>
+                            <input type="text" id="jobTitle" name="jobTitle" required placeholder="e.g., Senior Full Stack Developer">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description <span class="required">*</span></label>
+                            <textarea id="jobDescription" name="jobDescription" rows="6" required placeholder="Describe the role, responsibilities, and what you're looking for..."></textarea>
+                            <small>Minimum 100 characters</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jobType">Job Type <span class="required">*</span></label>
+                                <select id="jobType" name="jobType" required>
+                                    <option value="">Select job type</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="freelance">Freelance</option>
+                                    <option value="internship">Internship</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="experienceLevel">Experience Level <span class="required">*</span></label>
+                                <select id="experienceLevel" name="experienceLevel" required>
+                                    <option value="">Select level</option>
+                                    <option value="entry">Entry Level (0-2 years)</option>
+                                    <option value="mid">Mid Level (2-5 years)</option>
+                                    <option value="senior">Senior Level (5+ years)</option>
+                                    <option value="lead">Lead/Manager</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Salary & Compensation -->
+                    <div class="form-section">
+                        <h2 class="form-section-title">Salary & Compensation</h2>
+                        <p class="form-section-desc">Transparent salary information helps attract the right candidates</p>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="salaryMin">Minimum Salary <span class="required">*</span></label>
+                                <div class="input-with-prefix">
+                                    <span class="input-prefix">$</span>
+                                    <input type="number" id="salaryMin" name="salaryMin" required placeholder="50000" min="0">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="salaryMax">Maximum Salary <span class="required">*</span></label>
+                                <div class="input-with-prefix">
+                                    <span class="input-prefix">$</span>
+                                    <input type="number" id="salaryMax" name="salaryMax" required placeholder="80000" min="0">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="salaryPeriod">Payment Period <span class="required">*</span></label>
+                                <select id="salaryPeriod" name="salaryPeriod" required>
+                                    <option value="year">Per Year</option>
+                                    <option value="month">Per Month</option>
+                                    <option value="hour">Per Hour</option>
+                                    <option value="project">Per Project</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location & Work Setup -->
+                    <div class="form-section">
+                        <h2 class="form-section-title">Location & Work Setup</h2>
+                        
+                        <div class="form-group">
+                            <label for="workLocation">Work Location Type <span class="required">*</span></label>
+                            <select id="workLocation" name="workLocation" required>
+                                <option value="">Select location type</option>
+                                <option value="remote">Remote</option>
+                                <option value="on-site">On-site</option>
+                                <option value="hybrid">Hybrid</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="locationGroup">
+                            <label for="location">Location <span class="required">*</span></label>
+                            <input type="text" id="location" name="location" placeholder="e.g., San Francisco, CA or Worldwide">
+                            <small>Enter city/state or 'Worldwide' for remote positions</small>
+                        </div>
+                    </div>
+
+                    <!-- Skills & Requirements -->
+                    <div class="form-section">
+                        <h2 class="form-section-title">Skills & Requirements</h2>
+                        
+                        <div class="form-group">
+                            <label for="requiredSkills">Required Skills <span class="required">*</span></label>
+                            <input type="text" id="requiredSkills" name="requiredSkills" required placeholder="e.g., JavaScript, React, Node.js">
+                            <small>Separate skills with commas</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preferredSkills">Preferred Skills (Optional)</label>
+                            <input type="text" id="preferredSkills" name="preferredSkills" placeholder="e.g., TypeScript, GraphQL, AWS">
+                            <small>Separate skills with commas</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="requirements">Additional Requirements</label>
+                            <textarea id="requirements" name="requirements" rows="4" placeholder="List any additional requirements, qualifications, or certifications..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Application Details -->
+                    <div class="form-section">
+                        <h2 class="form-section-title">Application Details</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="deadline">Application Deadline</label>
+                                <input type="date" id="deadline" name="deadline">
+                                <small>Leave blank for no deadline</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="positions">Number of Positions</label>
+                                <input type="number" id="positions" name="positions" value="1" min="1" max="100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Escrow Option (for Freelance/Contract) -->
+                    <div class="form-section" id="escrowSection" style="display: none;">
+                        <h2 class="form-section-title">Payment Protection</h2>
+                        
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="useEscrow" name="useEscrow">
+                                <span>
+                                    <strong>Use Escrow Payment System</strong><br>
+                                    <small>Protect both parties by holding payment until work is completed</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary btn-large" id="saveDraftBtn">Save as Draft</button>
+                        <button type="submit" class="btn-primary btn-large">Publish Job Post</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="post-job.js"></script>
+</body>
+</html>

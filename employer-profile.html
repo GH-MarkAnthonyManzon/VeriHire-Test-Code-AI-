@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search candidates..." id="candidateSearch">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">5</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">🏢</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="employer-profile.html">Company Profile</a>
+                        <a href="employer-settings.html">Settings</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="employer-dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="post-job.html" class="sidebar-link">
+                    <span class="sidebar-icon">➕</span>
+                    <span>Post a Job</span>
+                </a>
+                <a href="my-jobs.html" class="sidebar-link">
+                    <span class="sidebar-icon">💼</span>
+                    <span>My Jobs</span>
+                </a>
+                <a href="applications-received.html" class="sidebar-link">
+                    <span class="sidebar-icon">📨</span>
+                    <span>Applications</span>
+                </a>
+                <a href="employer-profile.html" class="sidebar-link active">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Company Profile</h1>
+                    <p class="dashboard-subtitle">Manage your company information</p>
+                </div>
+            </div>
+
+            <!-- Profile Completion -->
+            <div class="profile-completion" id="profileCompletion">
+                <div class="completion-header">
+                    <h3>Profile Completion</h3>
+                    <span class="completion-percentage" id="completionPercentage">0%</span>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-progress" id="completionProgress" style="width: 0%"></div>
+                </div>
+                <p class="completion-text" id="completionText">Complete your company profile to attract top talent!</p>
+            </div>
+
+            <!-- Profile Form -->
+            <form id="profileForm" class="profile-form">
+                
+                <!-- Company Information -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Company Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="companyName">Company Name <span class="required">*</span></label>
+                        <input type="text" id="companyName" name="companyName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" disabled>
+                        <small>Email cannot be changed</small>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Company Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">Company Website</label>
+                            <input type="url" id="website" name="website" placeholder="https://yourcompany.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tagline">Company Tagline</label>
+                        <input type="text" id="tagline" name="tagline" placeholder="e.g., Building the future of technology">
+                        <small>Max 100 characters</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Company Description</label>
+                        <textarea id="description" name="description" rows="6" placeholder="Tell workers about your company, mission, culture, and what makes you unique..."></textarea>
+                        <small><span id="descCount">0</span>/1000 characters</small>
+                    </div>
+                </div>
+
+                <!-- Company Details -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Company Details</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="industry">Industry <span class="required">*</span></label>
+                            <select id="industry" name="industry" required>
+                                <option value="">Select...</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Education">Education</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Real Estate">Real Estate</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="companySize">Company Size <span class="required">*</span></label>
+                            <select id="companySize" name="companySize" required>
+                                <option value="">Select...</option>
+                                <option value="1-10">1-10 employees</option>
+                                <option value="11-50">11-50 employees</option>
+                                <option value="51-200">51-200 employees</option>
+                                <option value="201-500">201-500 employees</option>
+                                <option value="501-1000">501-1000 employees</option>
+                                <option value="1000+">1000+ employees</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="founded">Year Founded</label>
+                            <input type="number" id="founded" name="founded" placeholder="2020" min="1800" max="2025">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Headquarters Location</label>
+                            <input type="text" id="location" name="location" placeholder="City, State/Country">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Person -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Primary Contact</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactName">Contact Name</label>
+                            <input type="text" id="contactName" name="contactName" placeholder="e.g., John Smith">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactTitle">Contact Title</label>
+                            <input type="text" id="contactTitle" name="contactTitle" placeholder="e.g., HR Manager">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactEmail">Contact Email</label>
+                        <input type="email" id="contactEmail" name="contactEmail" placeholder="hr@company.com">
+                    </div>
+                </div>
+
+                <!-- Company Culture -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Company Culture & Benefits</h2>
+                    
+                    <div class="form-group">
+                        <label for="culture">Company Culture</label>
+                        <textarea id="culture" name="culture" rows="4" placeholder="Describe your work environment, team culture, and values..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="benefits">Employee Benefits</label>
+                        <textarea id="benefits" name="benefits" rows="4" placeholder="List benefits like health insurance, remote work, flexible hours, etc."></textarea>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Social Media</h2>
+                    
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn Company Page</label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/company/yourcompany">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="twitter">Twitter/X Profile</label>
+                        <input type="url" id="twitter" name="twitter" placeholder="https://twitter.com/yourcompany">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="facebook">Facebook Page</label>
+                        <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/yourcompany">
+                    </div>
+                </div>
+
+                <!-- Hiring Preferences -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Hiring Preferences</h2>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="activelyHiring" name="activelyHiring">
+                            <span><strong>Actively Hiring</strong> - Show a badge on your profile</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remoteOk" name="remoteOk">
+                            <span><strong>Remote Work Available</strong> - We hire remote workers</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="sponsorVisa" name="sponsorVisa">
+                            <span><strong>Visa Sponsorship</strong> - We sponsor work visas</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary btn-large" onclick="window.location.href='employer-dashboard.html'">Cancel</button>
+                    <button type="submit" class="btn-primary btn-large">💾 Save Profile</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="employer-profile.js"></script>
+</body>
+</html>

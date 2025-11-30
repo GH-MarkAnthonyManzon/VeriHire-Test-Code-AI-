@@ -1,0 +1,575 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #e5e7eb;
+    background-color: #0f172a;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #1e293b;
+    color: #e5e7eb;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #334155;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Logo Link Fix - Add this to your style.css */
+a.logo {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:not(.btn-primary):not(.btn-secondary):hover {
+    color: #f97316;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    color: #ffffff !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+    color: #ffffff !important;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #f97316;
+    padding: 10px 20px;
+    border: 2px solid #f97316;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.btn-secondary:hover {
+    background-color: #f97316;
+    color: #ffffff;
+}
+
+.btn-large {
+    padding: 14px 32px;
+    font-size: 16px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 32px;
+    color: #cbd5e1;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Features Section */
+.features {
+    padding: 80px 0;
+    background-color: #0f172a;
+}
+
+.features h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 48px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.feature-card {
+    background-color: #1e293b;
+    padding: 32px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    transition: all 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-card:hover {
+    border-color: #f97316;
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
+    transform: translateY(-4px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.feature-card p {
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* How It Works Section */
+.how-it-works {
+    padding: 80px 0;
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+}
+
+.how-it-works .container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.how-it-works h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 48px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.step {
+    background-color: #1e293b;
+    padding: 40px 32px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.step-number {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    color: white;
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+}
+
+.step h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.step p {
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+    background-color: #020617;
+    color: #64748b;
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid #1e293b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 16px;
+        font-size: 14px;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.125rem;
+    }
+    
+    .features h2,
+    .how-it-works h2 {
+        font-size: 2rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero {
+        padding: 60px 0;
+    }
+    
+    .features,
+    .how-it-works {
+        padding: 60px 0;
+    }
+}
+
+@media (min-width: 769px) {
+    .steps {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Authentication Pages Styles */
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.auth-box {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 48px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.auth-box h1 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.auth-subtitle {
+    color: #94a3b8;
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 15px;
+}
+
+/* Account Type Selector */
+.account-type-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.type-btn {
+    background-color: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    padding: 20px 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.type-btn:hover {
+    border-color: #f97316;
+    background-color: #1e293b;
+}
+
+.type-btn.active {
+    border-color: #f97316;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(251, 146, 60, 0.1) 100%);
+    color: #ffffff;
+}
+
+.type-icon {
+    font-size: 2rem;
+}
+
+.type-label {
+    font-size: 14px;
+}
+
+/* Form Styles */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    color: #e5e7eb;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: #e5e7eb;
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #f97316;
+}
+
+.form-group small {
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-top: 2px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.checkbox-label a {
+    color: #f97316;
+    text-decoration: none;
+}
+
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+/* Button Block */
+.btn-block {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* Auth Footer */
+.auth-footer {
+    text-align: center;
+    margin-top: 24px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.auth-footer a {
+    color: #f97316;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Conditional Fields Animation */
+.conditional-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .auth-box {
+        padding: 32px 24px;
+    }
+    
+    .account-type-selector {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Login Page Additional Styles - Add to bottom of style.css */
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.forgot-password {
+    color: #f97316;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Make logo clickable */
+a.logo {
+    text-decoration: none;
+    cursor: pointer;
+}

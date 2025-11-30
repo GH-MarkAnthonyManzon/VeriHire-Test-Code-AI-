@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Test Data - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .setup-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .setup-section {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        .setup-section h2 {
+            color: #f97316;
+            margin-bottom: 16px;
+        }
+        .setup-section p {
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .status-message {
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-weight: 600;
+        }
+        .success {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid #10b981;
+        }
+        .info {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            border: 1px solid #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">VeriHire</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="debug.html">Debug Panel</a></li>
+                <li><a href="login.html" class="btn-secondary">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="setup-container">
+        <h1 style="color: #ffffff; margin-bottom: 24px;">🚀 Setup Test Data</h1>
+
+        <!-- Quick Setup -->
+        <div class="setup-section">
+            <h2>⚡ Quick Setup (Recommended)</h2>
+            <p>Creates test users (worker + employer) and 5 sample job postings in one click!</p>
+            <button class="btn-primary btn-large" onclick="quickSetup()">🚀 Quick Setup Everything</button>
+            <div id="quickStatus"></div>
+        </div>
+
+        <!-- Manual Setup -->
+        <div class="setup-section">
+            <h2>👤 Create Test Users</h2>
+            <p>Create individual test accounts for testing</p>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="createTestWorker()">Create Worker Account</button>
+                <button class="btn-primary" onclick="createTestEmployer()">Create Employer Account</button>
+            </div>
+            <div id="userStatus"></div>
+        </div>
+
+        <div class="setup-section">
+            <h2>💼 Create Test Jobs</h2>
+            <p>Add sample job postings (requires employer account)</p>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="createSampleJobs(5)">Create 5 Jobs</button>
+                <button class="btn-primary" onclick="createSampleJobs(10)">Create 10 Jobs</button>
+                <button class="btn-primary" onclick="createSampleJobs(20)">Create 20 Jobs</button>
+            </div>
+            <div id="jobStatus"></div>
+        </div>
+
+        <!-- Current Data -->
+        <div class="setup-section">
+            <h2>📊 Current Data</h2>
+            <p id="currentData">Loading...</p>
+            <button class="btn-secondary" onclick="updateDataDisplay()">🔄 Refresh</button>
+        </div>
+
+        <!-- Clear Data -->
+        <div class="setup-section">
+            <h2>🗑️ Clear Data</h2>
+            <p style="color: #ef4444;">Danger zone - this will delete data!</p>
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="clearJobs()">Clear Jobs Only</button>
+                <button class="btn-secondary" onclick="clearApplications()">Clear Applications</button>
+                <button class="btn-secondary" style="background-color: #ef4444; border-color: #ef4444; color: white;" onclick="clearAllData()">Clear Everything</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Test accounts
+        const TEST_WORKER = {
+            fullName: 'John Worker',
+            email: 'worker@test.com',
+            password: 'password123',
+            accountType: 'worker',
+            skills: 'JavaScript, React, Node.js, Python',
+            experience: '3-5',
+            timestamp: new Date().toISOString()
+        };
+
+        const TEST_EMPLOYER = {
+            fullName: 'Jane Employer',
+            email: 'employer@test.com',
+            password: 'password123',
+            accountType: 'employer',
+            companyName: 'TechCorp Inc',
+            companySize: '51-200',
+            industry: 'Technology',
+            timestamp: new Date().toISOString()
+        };
+
+        // Sample job templates
+        const JOB_TEMPLATES = [
+            {
+                title: 'Senior Full Stack Developer',
+                description: 'We are looking for an experienced full stack developer to join our growing team. You will work on cutting-edge web applications using modern technologies and best practices. This role offers excellent growth opportunities and a collaborative work environment.',
+                type: 'full-time',
+                level: 'senior',
+                salaryMin: 80000,
+                salaryMax: 120000,
+                location: 'Remote',
+                workLocation: 'remote',
+                skills: ['JavaScript', 'React', 'Node.js', 'MongoDB', 'TypeScript']
+            },
+            {
+                title: 'UI/UX Designer',
+                description: 'Join our creative team as a UI/UX Designer. You will be responsible for creating beautiful, intuitive user interfaces and conducting user research. Strong portfolio required.',
+                type: 'full-time',
+                level: 'mid',
+                salaryMin: 60000,
+                salaryMax: 85000,
+                location: 'New York, NY',
+                workLocation: 'hybrid',
+                skills: ['Figma', 'Adobe XD', 'User Research', 'Prototyping', 'Wireframing']
+            },
+            {
+                title: 'Frontend Developer',
+                description: 'We need a talented frontend developer who is passionate about creating amazing user experiences. You will work with React and modern CSS frameworks.',
+                type: 'full-time',
+                level: 'mid',
+                salaryMin: 70000,
+                salaryMax: 95000,
+                location: 'San Francisco, CA',
+                workLocation: 'on-site',
+                skills: ['React', 'CSS', 'HTML', 'JavaScript', 'Tailwind']
+            },
+            {
+                title: 'Python Backend Developer',
+                description: 'Looking for a Python expert to build robust backend systems. Experience with Django or Flask required. You will work on scalable APIs and microservices.',
+                type: 'contract',
+                level: 'senior',
+                salaryMin: 90000,
+                salaryMax: 130000,
+                location: 'Remote',
+                workLocation: 'remote',
+                skills: ['Python', 'Django', 'PostgreSQL', 'Docker', 'AWS']
+            },
+            {
+                title: 'Junior Web Developer',
+                description: 'Great opportunity for new developers! We provide mentorship and training. You will learn modern web development practices while building real projects.',
+                type: 'full-time',
+                level: 'entry',
+                salaryMin: 45000,
+                salaryMax: 60000,
+                location: 'Austin, TX',
+                workLocation: 'hybrid',
+                skills: ['HTML', 'CSS', 'JavaScript', 'Git']
+            },
+            {
+                title: 'DevOps Engineer',
+                description: 'Join our infrastructure team to build and maintain CI/CD pipelines. Experience with cloud platforms and containerization required.',
+                type: 'full-time',
+                level: 'senior',
+                salaryMin: 95000,
+                salaryMax: 140000,
+                location: 'Remote',
+                workLocation: 'remote',
+                skills: ['AWS', 'Docker', 'Kubernetes', 'Jenkins', 'Terraform']
+            },
+            {
+                title: 'Mobile App Developer',
+                description: 'Build amazing mobile experiences for iOS and Android. Experience with React Native or Flutter preferred.',
+                type: 'full-time',
+                level: 'mid',
+                salaryMin: 75000,
+                salaryMax: 100000,
+                location: 'Seattle, WA',
+                workLocation: 'hybrid',
+                skills: ['React Native', 'Flutter', 'iOS', 'Android', 'Mobile UI']
+            },
+            {
+                title: 'Data Scientist',
+                description: 'Apply machine learning and statistical analysis to solve business problems. PhD or Masters degree preferred.',
+                type: 'full-time',
+                level: 'senior',
+                salaryMin: 100000,
+                salaryMax: 150000,
+                location: 'Boston, MA',
+                workLocation: 'on-site',
+                skills: ['Python', 'Machine Learning', 'Statistics', 'TensorFlow', 'SQL']
+            },
+            {
+                title: 'Freelance Content Writer',
+                description: 'Write engaging blog posts and articles for tech companies. Flexible hours, work from anywhere.',
+                type: 'freelance',
+                level: 'mid',
+                salaryMin: 30,
+                salaryMax: 60,
+                location: 'Worldwide',
+                workLocation: 'remote',
+                skills: ['Writing', 'SEO', 'Content Strategy', 'Research']
+            },
+            {
+                title: 'QA Automation Engineer',
+                description: 'Build and maintain automated test suites. Experience with Selenium and test frameworks required.',
+                type: 'full-time',
+                level: 'mid',
+                salaryMin: 65000,
+                salaryMax: 90000,
+                location: 'Chicago, IL',
+                workLocation: 'hybrid',
+                skills: ['Selenium', 'Jest', 'Cypress', 'Test Automation', 'JavaScript']
+            }
+        ];
+
+        // Quick setup
+        function quickSetup() {
+            const status = document.getElementById('quickStatus');
+            status.innerHTML = '<div class="status-message info">⏳ Setting up test environment...</div>';
+
+            try {
+                // Create test users
+                createTestWorker(true);
+                createTestEmployer(true);
+                
+                // Create jobs
+                createSampleJobs(5, true);
+                
+                status.innerHTML = `
+                    <div class="status-message success">
+                        ✅ Quick setup complete!<br><br>
+                        <strong>Test Accounts Created:</strong><br>
+                        Worker: worker@test.com / password123<br>
+                        Employer: employer@test.com / password123<br><br>
+                        <strong>5 sample jobs created!</strong><br><br>
+                        <a href="login.html" class="btn-primary">Go to Login</a>
+                    </div>
+                `;
+                updateDataDisplay();
+            } catch (error) {
+                status.innerHTML = `<div class="status-message" style="background-color: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444;">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Create test worker
+        function createTestWorker(silent = false) {
+            const users = JSON.parse(localStorage.getItem('verihire_users') || '[]');
+            
+            if (users.some(u => u.email === TEST_WORKER.email)) {
+                if (!silent) {
+                    document.getElementById('userStatus').innerHTML = '<div class="status-message info">ℹ️ Worker account already exists!</div>';
+                }
+                return;
+            }
+            
+            users.push(TEST_WORKER);
+            localStorage.setItem('verihire_users', JSON.stringify(users));
+            
+            if (!silent) {
+                document.getElementById('userStatus').innerHTML = '<div class="status-message success">✅ Worker created: worker@test.com / password123</div>';
+                updateDataDisplay();
+            }
+        }
+
+        // Create test employer
+        function createTestEmployer(silent = false) {
+            const users = JSON.parse(localStorage.getItem('verihire_users') || '[]');
+            
+            if (users.some(u => u.email === TEST_EMPLOYER.email)) {
+                if (!silent) {
+                    document.getElementById('userStatus').innerHTML = '<div class="status-message info">ℹ️ Employer account already exists!</div>';
+                }
+                return;
+            }
+            
+            users.push(TEST_EMPLOYER);
+            localStorage.setItem('verihire_users', JSON.stringify(users));
+            
+            if (!silent) {
+                document.getElementById('userStatus').innerHTML = '<div class="status-message success">✅ Employer created: employer@test.com / password123</div>';
+                updateDataDisplay();
+            }
+        }
+
+        // Create sample jobs
+        function createSampleJobs(count, silent = false) {
+            const users = JSON.parse(localStorage.getItem('verihire_users') || '[]');
+            const employer = users.find(u => u.accountType === 'employer');
+            
+            if (!employer) {
+                alert('Please create an employer account first!');
+                return;
+            }
+            
+            const jobs = JSON.parse(localStorage.getItem('verihire_jobs') || '[]');
+            
+            for (let i = 0; i < count && i < JOB_TEMPLATES.length; i++) {
+                const template = JOB_TEMPLATES[i];
+                const job = {
+                    id: 'job_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                    employerEmail: employer.email,
+                    employerName: employer.fullName,
+                    companyName: employer.companyName || employer.fullName,
+                    jobTitle: template.title,
+                    jobDescription: template.description,
+                    jobType: template.type,
+                    experienceLevel: template.level,
+                    salaryMin: template.salaryMin,
+                    salaryMax: template.salaryMax,
+                    salaryPeriod: template.type === 'freelance' ? 'hour' : 'year',
+                    workLocation: template.workLocation,
+                    location: template.location,
+                    requiredSkills: template.skills,
+                    preferredSkills: [],
+                    requirements: 'Bachelor degree or equivalent experience',
+                    deadline: null,
+                    positions: 1,
+                    useEscrow: template.type === 'freelance' || template.type === 'contract',
+                    status: 'active',
+                    createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
+                    applications: [],
+                    views: Math.floor(Math.random() * 500)
+                };
+                jobs.push(job);
+            }
+            
+            localStorage.setItem('verihire_jobs', JSON.stringify(jobs));
+            
+            if (!silent) {
+                document.getElementById('jobStatus').innerHTML = `<div class="status-message success">✅ Created ${count} sample jobs!</div>`;
+                updateDataDisplay();
+            }
+        }
+
+        // Clear functions
+        function clearJobs() {
+            if (confirm('Clear all jobs?')) {
+                localStorage.removeItem('verihire_jobs');
+                alert('Jobs cleared!');
+                updateDataDisplay();
+            }
+        }
+
+        function clearApplications() {
+            if (confirm('Clear all applications?')) {
+                localStorage.removeItem('verihire_applications');
+                alert('Applications cleared!');
+                updateDataDisplay();
+            }
+        }
+
+        function clearAllData() {
+            if (confirm('Clear ALL data? This will remove users, jobs, and applications!')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                alert('All data cleared!');
+                updateDataDisplay();
+            }
+        }
+
+        // Update data display
+        function updateDataDisplay() {
+            const users = JSON.parse(localStorage.getItem('verihire_users') || '[]');
+            const jobs = JSON.parse(localStorage.getItem('verihire_jobs') || '[]');
+            const applications = JSON.parse(localStorage.getItem('verihire_applications') || '[]');
+            
+            const workers = users.filter(u => u.accountType === 'worker').length;
+            const employers = users.filter(u => u.accountType === 'employer').length;
+            
+            document.getElementById('currentData').innerHTML = `
+                <strong>👤 Users:</strong> ${users.length} total (${workers} workers, ${employers} employers)<br>
+                <strong>💼 Jobs:</strong> ${jobs.length} total<br>
+                <strong>📋 Applications:</strong> ${applications.length} total
+            `;
+        }
+
+        // Initialize
+        updateDataDisplay();
+    </script>
+</body>
+</html>

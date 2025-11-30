@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Jobs - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search your jobs..." id="jobSearch">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">5</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">🏢</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="employer-profile.html">Company Profile</a>
+                        <a href="employer-settings.html">Settings</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="employer-dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="post-job.html" class="sidebar-link">
+                    <span class="sidebar-icon">➕</span>
+                    <span>Post a Job</span>
+                </a>
+                <a href="my-jobs.html" class="sidebar-link active">
+                    <span class="sidebar-icon">💼</span>
+                    <span>My Jobs</span>
+                </a>
+                <a href="applications-received.html" class="sidebar-link">
+                    <span class="sidebar-icon">📨</span>
+                    <span>Applications</span>
+                </a>
+                <a href="employer-profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1>My Job Posts</h1>
+                    <p class="dashboard-subtitle">Manage all your job postings</p>
+                </div>
+                <a href="post-job.html" class="btn-primary">+ Post New Job</a>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Jobs (<span id="countAll">0</span>)</button>
+                <button class="filter-tab" data-filter="active">Active (<span id="countActive">0</span>)</button>
+                <button class="filter-tab" data-filter="draft">Drafts (<span id="countDraft">0</span>)</button>
+                <button class="filter-tab" data-filter="closed">Closed (<span id="countClosed">0</span>)</button>
+            </div>
+
+            <!-- Jobs List -->
+            <div class="jobs-list" id="jobsList">
+                <!-- Jobs will be loaded here by JavaScript -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">📭</div>
+                    <h3>No jobs found</h3>
+                    <p>You haven't posted any jobs yet</p>
+                    <a href="post-job.html" class="btn-primary">Post Your First Job</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="my-jobs.js"></script>
+</body>
+</html>

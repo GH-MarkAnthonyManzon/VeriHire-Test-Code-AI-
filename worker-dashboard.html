@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Dashboard - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search jobs..." id="jobSearch">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="worker-profile.html">My Profile</a>
+                        <a href="worker-portfolio.html">Portfolio</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="worker-dashboard.html" class="sidebar-link active">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="browse-jobs.html" class="sidebar-link">
+                    <span class="sidebar-icon">🔍</span>
+                    <span>Browse Jobs</span>
+                </a>
+                <a href="my-applications.html" class="sidebar-link">
+                    <span class="sidebar-icon">📋</span>
+                    <span>My Applications</span>
+                </a>
+                <a href="worker-portfolio.html" class="sidebar-link">
+                    <span class="sidebar-icon">📂</span>
+                    <span>Portfolio</span>
+                </a>
+                <a href="worker-profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Welcome Section -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Welcome back, <span id="welcomeName">Worker</span>! 👋</h1>
+                    <p class="dashboard-subtitle">Here's what's happening with your job search</p>
+                </div>
+                <a href="worker-profile.html" class="btn-primary">Complete Profile</a>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Applications Sent</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👁️</div>
+                    <div class="stat-content">
+                        <div class="stat-value">48</div>
+                        <div class="stat-label">Profile Views</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💼</div>
+                    <div class="stat-content">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Interview Requests</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-value">4.8</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section-header">
+                <h2>Quick Actions</h2>
+            </div>
+            <div class="quick-actions">
+                <a href="browse-jobs.html" class="action-card">
+                    <div class="action-icon">🔍</div>
+                    <h3>Browse Jobs</h3>
+                    <p>Find new opportunities</p>
+                </a>
+                <a href="worker-portfolio.html" class="action-card">
+                    <div class="action-icon">📂</div>
+                    <h3>Update Portfolio</h3>
+                    <p>Showcase your work</p>
+                </a>
+                <a href="my-applications.html" class="action-card">
+                    <div class="action-icon">📋</div>
+                    <h3>Track Applications</h3>
+                    <p>Check status updates</p>
+                </a>
+            </div>
+
+            <!-- Recommended Jobs -->
+            <div class="section-header">
+                <h2>Recommended for You</h2>
+                <a href="browse-jobs.html" class="view-all-link">View All →</a>
+            </div>
+            <div class="jobs-list" id="recommendedJobs">
+                <!-- Jobs will be loaded here -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo">🏢</div>
+                        <div class="job-title-group">
+                            <h3>Full Stack Developer</h3>
+                            <p class="company-name">TechCorp Inc.</p>
+                        </div>
+                        <span class="job-badge featured">Featured</span>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-detail-item">💰 $60,000 - $80,000/year</span>
+                        <span class="job-detail-item">📍 Remote</span>
+                        <span class="job-detail-item">⏰ Full-time</span>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-posted">Posted 2 days ago</span>
+                        <a href="#" class="btn-primary btn-small">Apply Now</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="company-logo">🎨</div>
+                        <div class="job-title-group">
+                            <h3>UI/UX Designer</h3>
+                            <p class="company-name">DesignHub Studio</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-detail-item">💰 $50,000 - $65,000/year</span>
+                        <span class="job-detail-item">📍 San Francisco, CA</span>
+                        <span class="job-detail-item">⏰ Full-time</span>
+                    </div>
+                    <div class="job-skills">
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Adobe XD</span>
+                        <span class="skill-tag">Prototyping</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-posted">Posted 1 week ago</span>
+                        <a href="#" class="btn-primary btn-small">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="section-header">
+                <h2>Recent Activity</h2>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">✅</div>
+                    <div class="activity-content">
+                        <p class="activity-text">Your application for <strong>Senior Developer</strong> was viewed</p>
+                        <span class="activity-time">2 hours ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">📩</div>
+                    <div class="activity-content">
+                        <p class="activity-text">New message from <strong>TechStart Ltd</strong></p>
+                        <span class="activity-time">5 hours ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">⭐</div>
+                    <div class="activity-content">
+                        <p class="activity-text">You received a 5-star rating from <strong>WebAgency Co.</strong></p>
+                        <span class="activity-time">1 day ago</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="worker-dashboard.js"></script>
+</body>
+</html>

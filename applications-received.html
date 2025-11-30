@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications Received - VeriHire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="index.html" class="logo">VeriHire</a>
+            
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search candidates..." id="candidateSearch">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-badge">5</span>
+                </button>
+                <div class="user-menu">
+                    <button class="user-menu-btn" id="userMenuBtn">
+                        <span class="user-avatar">🏢</span>
+                        <span class="user-name" id="userName">Loading...</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="employer-profile.html">Company Profile</a>
+                        <a href="employer-settings.html">Settings</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Sidebar -->
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <nav class="sidebar-nav">
+                <a href="employer-dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="post-job.html" class="sidebar-link">
+                    <span class="sidebar-icon">➕</span>
+                    <span>Post a Job</span>
+                </a>
+                <a href="my-jobs.html" class="sidebar-link">
+                    <span class="sidebar-icon">💼</span>
+                    <span>My Jobs</span>
+                </a>
+                <a href="applications-received.html" class="sidebar-link active">
+                    <span class="sidebar-icon">📨</span>
+                    <span>Applications</span>
+                </a>
+                <a href="employer-profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Applications Received</h1>
+                    <p class="dashboard-subtitle">Review and manage candidate applications</p>
+                </div>
+            </div>
+
+            <!-- Stats Summary -->
+            <div class="stats-grid" style="margin-bottom: 32px;">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalCount">0</div>
+                        <div class="stat-label">Total Applications</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="pendingCount">0</div>
+                        <div class="stat-label">Pending Review</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="shortlistedCount">0</div>
+                        <div class="stat-label">Shortlisted</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="reviewingCount">0</div>
+                        <div class="stat-label">Under Review</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Filter -->
+            <div class="filters-section">
+                <div class="filters-row">
+                    <select id="jobFilter" class="filter-select">
+                        <option value="">All Jobs</option>
+                    </select>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="reviewing">Reviewing</option>
+                        <option value="shortlisted">Shortlisted</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                    <button class="btn-secondary" id="clearFiltersBtn">Clear Filters</button>
+                </div>
+            </div>
+
+            <!-- Applications List -->
+            <div class="applications-list" id="applicationsList">
+                <!-- Applications will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state hidden" id="emptyState">
+                <div class="empty-icon">📭</div>
+                <h3>No applications yet</h3>
+                <p>Applications will appear here when candidates apply to your jobs</p>
+                <a href="my-jobs.html" class="btn-primary">View My Jobs</a>
+            </div>
+        </main>
+    </div>
+
+    <script src="applications-received.js"></script>
+</body>
+</html>
